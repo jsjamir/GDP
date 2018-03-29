@@ -10,18 +10,14 @@ def write_config(filename):
 
 gdp.gdp_init()
 random_int =  randint(1,100)
-gcl_input, pem_input = write_config("inputs.txt")
+gcl_input = write_config("inputs.txt")[0]
 print "gcl: [%r]" % gcl_input
-print "pem: [%r]" % pem_input
 
 gcl_name = gdp.GDP_NAME(gcl_input)
-skey = gdp.EP_CRYPTO_KEY(filename=pem_input,
-       keyform=gdp.EP_CRYPTO_KEYFORM_PEM, flags=gdp.EP_CRYPTO_F_SECRET)
-
-gcl_handle = gdp.GDP_GCL(gcl_name, gdp.GDP_MODE_RA, {"skey":skey})
+gcl_handle = gdp.GDP_GCL(gcl_name, gdp.GDP_MODE_RO)
 
 #GDP Reading
-gcl_handle.multiread(-2,2)
+gcl_handle.multiread(-5,4)
 
 while True:
     event = gcl_handle.get_next_event(None)
