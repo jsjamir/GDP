@@ -21,7 +21,7 @@ skey = gdp.EP_CRYPTO_KEY(filename=pem_input,
 gcl_handle = gdp.GDP_GCL(gcl_name, gdp.GDP_MODE_RA, {"skey":skey})
 
 #GDP Reading
-gcl_handle.multiread(-2,2)
+gcl_handle.subscribe(3, 0, None)
 
 while True:
     event = gcl_handle.get_next_event(None)
